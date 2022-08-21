@@ -1,0 +1,15 @@
+.footerNav{
+    height: 50px;
+    background-color:pink;
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 0;
+    .navbar{
+        padding-top: 13px;
+        padding-bottom: auto; 
+        font-weight: bold;
+        text-decoration: none;
+        
+    }
+}

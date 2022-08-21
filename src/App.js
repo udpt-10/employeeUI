@@ -1,23 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
-
+// import Body from "./Components/Detail/Body";
+// import BodyOT from "./Components/OT/BodyOT";
+// import BodyLeave from "./Components/Leave/BodyLeave";
+// import BodySupport from "./Components/Support/BodySupport";
+// import BodyChecking from "./Components/Checking/BodyChecking";
+// import BodyWFH from "./Components/WFH/BodyWFH";
+// import Salary from "./Components/Salary";
+import AppComponent from "./Components/App";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <AppComponent/>
     </div>
   );
 }
