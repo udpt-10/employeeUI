@@ -14,7 +14,7 @@ div#pageLogin {
     animation: Gradient 15s ease infinite;
     box-sizing: border-box;
 }
-form {
+#form {
   grid-column: 2;
   grid-row: 2;
   display: grid;
@@ -87,7 +87,7 @@ form {
 
 
 @media only screen and (min-width: 420px) {
-    form {
+    #form {
       h2 {
         font-size: 40px;
       }

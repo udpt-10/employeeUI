@@ -5,3 +5,4 @@ export const OT = "/ot";
 export const SalaryPath = "/salary";
 export const Support = "/support";
 export const WFH = "/workfromhome";
+export const LoginURL ="/login";
