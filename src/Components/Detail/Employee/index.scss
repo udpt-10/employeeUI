@@ -1,5 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Jura:400');
+
+* {
+  font-family: Jura, Arial;
+  font-weight: 400;
+}
+
 .employee-body {
   border: 1px solid;
-  padding: 10px;
+  padding: 40px;
+  margin: 50px;
   box-shadow: 5px 10px 8px 10px #888888;
+
+  .name-employee {
+    font-size: 40px;
+    font-weight: bold;
+  }
 }

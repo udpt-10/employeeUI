@@ -1,8 +1,6 @@
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import "./index.scss";
-import { BsFillBellFill } from "react-icons/bs";
-import { FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import {
   Checking,
@@ -40,8 +38,6 @@ const Navigation = () => {
             <Navbar.Brand className="navbar">
               <Link to={SalaryPath}>Salary</Link>
             </Navbar.Brand>
-            <BsFillBellFill className="navbar bell" />
-            <FaUserCircle className="navbar user" />
           </Container>
         </Navbar>
       </Container>

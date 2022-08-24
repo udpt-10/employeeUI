@@ -5,13 +5,11 @@ import Footer from "../../Footer";
 
 
 const Body = () => {
-
   const data =  JSON.parse(localStorage.getItem("data" ));
-  console.log('data in detail: ', data);
   return (
     <>
       <Navigation/>
-      <Employee/>
+      <Employee data={data}/>
       <Footer/>
     </>
   );

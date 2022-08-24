@@ -6,122 +6,54 @@ import NewOTRequest from "../OTDialog/NewOTRequest";
 import { DataGrid } from "@mui/x-data-grid";
 import "./index.scss";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
-
+import { editOTRequest } from "../../API";
 const columnsDef = [
   { field: "id", headerName: "STT", width: 20 },
-  { field: "date", headerName: "Date", width: 150, editable: true },
-  { field: "time", headerName: "Time", width: 150, editable: true },
-  { field: "status", headerName: "Status", width: 150, editable: true },
-  { field: "approver", headerName: "Approvers", width: 150, editable: true },
-  { field: "reason", headerName: "Reason", width: 150, editable: true },
-];
-
-const rowsDataFake = [
+  { field: "date", headerName: "Date", width: 300, editable: true },
+  { field: "hour", headerName: "Time", width: 200, editable: true },
+  { field: "isApproved", headerName: "Status", width: 200, editable: true },
+  { field: "managerId", headerName: "Approvers", width: 200, editable: true },
+  { field: "reason", headerName: "Reason", width: 200, editable: true },
   {
-    id: 1,
-    date: "2022-09-08",
-    time: "3hours",
-    status: "Approved",
-    approver: "Nguyen Van Man",
-    reason: "travel",
+    field: "approveReason",
+    headerName: "Approve Reason",
+    width: 200,
+    editable: true,
   },
   {
-    id: 2,
-    date: "2022-09-08",
-    time: "3hours",
-    status: "Approved",
-    approver: "Nguyen Van Man",
-    reason: "travel",
-  },
-  {
-    id: 3,
-    date: "2022-09-08",
-    time: "3hours",
-    status: "Approved",
-    approver: "Nguyen Van Man",
-    reason: "travel",
-  },
-  {
-    id: 4,
-    date: "2022-09-08",
-    time: "3hours",
-    status: "Approved",
-    approver: "Nguyen Van Man",
-    reason: "travel",
-  },
-  {
-    id: 5,
-    date: "2022-09-08",
-    time: "3hours",
-    status: "Approved",
-    approver: "Nguyen Van Man",
-    reason: "travel",
-  },
-  {
-    id: 6,
-    date: "2022-09-08",
-    time: "3hours",
-    status: "Approved",
-    approver: "Nguyen Van Man",
-    reason: "travel",
-  },
-  {
-    id: 7,
-    date: "2022-09-08",
-    time: "3hours",
-    status: "Approved",
-    approver: "Nguyen Van Man",
-    reason: "travel",
-  },
-  {
-    id: 8,
-    date: "2022-09-08",
-    time: "3hours",
-    status: "Approved",
-    approver: "Nguyen Van Man",
-    reason: "travel",
-  },
-  {
-    id: 9,
-    date: "2022-09-08",
-    time: "3hours",
-    status: "Approved",
-    approver: "Nguyen Van Man",
-    reason: "travel",
-  },
-  {
-    id: 10,
-    date: "2022-09-08",
-    time: "3hours",
-    status: "Approved",
-    approver: "Nguyen Van Man",
-    reason: "travel",
-  },
-  {
-    id: 11,
-    date: "2022-09-08",
-    time: "3hours",
-    status: "Approved",
-    approver: "Nguyen Van Man",
-    reason: "travel",
+    field: "approveDate",
+    headerName: "Date Approve",
+    width: 200,
+    editable: true,
   },
 ];
 
 
-const OTDeTail = () => {
+const OTDeTail = (props) => {
   const [selectData, setSelecData] = useState();
   const [openDialog, setOpenDialog] = useState(false);
   const [openDialogNewRequest, setOpenDialogNewRequest] = useState(false);
+  const {data} = props;
+  console.log('data in body OT: ', data);
+
+  if(!data){
+    return;
+  }
+  console.log('data of OT body: ', data);
   const onRowsSelectionHandler = (ids) => {
     const selectedRowsData = ids.map((id) =>
-      rowsDataFake.find((row) => row.id === id)
+    data.find((row) => row.id === id)
     );
     setSelecData(selectedRowsData);
     setOpenDialog(true);
     console.log(selectedRowsData);
   };
 
-  const onSubmitClicked = () => {
+  const onSubmitClicked = (otEditData) => {
+    console.log(otEditData);
+    // delete otEditData[0].id;
+    console.log(otEditData);
+    editOTRequest(otEditData[0]);
     setOpenDialog(false);
     setOpenDialogNewRequest(false);
   };
@@ -135,6 +67,7 @@ const OTDeTail = () => {
     setOpenDialogNewRequest(true);
   };
 
+ 
   return (
     <>
       <div className="row">
@@ -146,7 +79,7 @@ const OTDeTail = () => {
       <div className="OT-Table">
         <Box sx={{ height: 360, width: "100%" }}>
           <DataGrid
-            rows={rowsDataFake}
+            rows={data}
             columns={columnsDef}
             pageSize={5}
             rowsPerPageOptions={[5]}
