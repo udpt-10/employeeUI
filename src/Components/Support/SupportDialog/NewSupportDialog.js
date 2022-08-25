@@ -1,20 +1,73 @@
-import React from "react";
+import React, {useState} from "react";
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 const NewSupportDialogRequest = (props) => {
-  const { open, onSubmitClicked, onCancelClicked } = props;
+  const { employeeID, open, onNewSubmitClicked, onCancelClicked } = props;
+
+  const [data, setData] = useState({
+    employeeId: employeeID,
+    date: "",
+    department: "",
+    reason: "",
+    describe: "",
+  });
+
+  const changeDate = (e) => {
+    let newData = {...data};
+    newData.date = e.target.value;
+    setData(newData);
+  }
+
+  const changedDepartment = (e) => {
+    let newData = {...data};
+    newData.department = e.target.value;
+    setData(newData);
+  }
+
+  const changeReason = (e) => {
+    let newData = {...data};
+    newData.reason = e.target.value;
+    setData(newData);
+  }
+
+  const changeDescribe = (e) => {
+    let newData = {...data};
+    newData.describe = e.target.value;
+    setData(newData);
+  }
+  
   return (
     <>
       <Dialog open={open}>
         <DialogTitle className="NewOTRequest title">New OT Request</DialogTitle>
         <DialogContent className="NewOTRequest content">
-          <div className="row">
-            <div className="col">Reason: </div>
+        <div className="row">
+            <div className="col">Date: </div>
             <div className="col">
-              <input />
+              <input type="datetime-local" onChange={changeDate}/>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col">Department: </div>
+            <div className="col">
+              <input type="text" onChange={changedDepartment}/>
             </div>
           </div>
           <div className="row">
-            <button onClick={onSubmitClicked} className="col-btn submit">
+            <div className="col">Reason: </div>
+            <div className="col">
+              <input type="text" onChange={changeReason}/>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col">Describe: </div>
+            <div className="col">
+              <input type="text" onChange={changeDescribe}/>
+            </div>
+          </div>
+          <div className="row">
+            <button onClick={() => onNewSubmitClicked(data)} className="col-btn submit">
               Submit
             </button>
             <button onClick={onCancelClicked} className="col-btn cancel">

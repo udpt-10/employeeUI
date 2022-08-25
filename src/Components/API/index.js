@@ -126,7 +126,47 @@ export const editWFHRequest = (data) => {
       "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
     },
   };
-
+  delete data.id;
   const url = "http://localhost:8002/WorkFromHome/edit";
+  return axios.post(url, data, config);
+}
+
+export const supportRequest = (employeeID) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+    },
+  };
+  const url ="http://localhost:8002/SupportRequest/allByEmployeeId/" + employeeID;
+  return axios.get(url, config);
+}
+
+export const addNewSupportRequest = (data) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+    },
+  };
+
+  const url = "http://localhost:8002/SupportRequest/add";
+  return axios.post(url, data, config);
+}
+
+export const editSupportRequest = (data) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+    },
+  };
+
+  delete data[0].id;
+  console.log(data);
+  const url ="http://localhost:8002/SupportRequest/edit";
   return axios.post(url, data, config);
 }

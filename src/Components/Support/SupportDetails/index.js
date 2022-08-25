@@ -6,106 +6,57 @@ import { DataGrid } from "@mui/x-data-grid";
 import "./index.scss";
 import SupportDialog from "../SupportDialog/SupportDialog";
 import NewSupportDialogRequest from "../SupportDialog/NewSupportDialog";
+import { addNewSupportRequest, editSupportRequest } from "../../API";
 const columnsDef = [
   { field: "id", headerName: "ID", width: 20 },
-  { field: "name", headerName: "Name", width: 150, editable: true },
+  { field: "department", headerName: "Department", width: 150, editable: true },
   { field: "date", headerName: "Date", width: 150, editable: true },
-  { field: "status", headerName: "Status", width: 150, editable: true },
+
   { field: "approver", headerName: "Approver", width: 150, editable: true },
   {
-    field: "request_reason",
+    field: "reason",
     headerName: "Request Reason",
     width: 150,
     editable: true,
   },
   {
-    field: "deny_reason",
+    field: "approved",
     headerName: "Deny Reason",
     width: 150,
     editable: true,
   },
-];
-
-const rowsDataFake = [
+  { field: "status", headerName: "Status", width: 150, editable: true },
   {
-    id: 1,
-    name: "Tran Bao Khanh",
-    date: "09/09/2022",
-    status: "Sent",
-    approver: "Nguyen Van Man",
-    request_reason: "khanh dep trai",
-    deny_reason: "khong",
-  },
-  {
-    id: 2,
-    name: "Tran Bao Khanh",
-    date: "09/09/2022",
-    status: "Sent",
-    approver: "Nguyen Van Man",
-    request_reason: "khanh dep trai",
-    deny_reason: "khong",
-  },
-  {
-    id: 3,
-    name: "Tran Bao Khanh",
-    date: "09/09/2022",
-    status: "Sent",
-    approver: "Nguyen Van Man",
-    request_reason: "khanh dep trai",
-    deny_reason: "khong",
-  },
-  {
-    id: 4,
-    name: "Tran Bao Khanh",
-    date: "09/09/2022",
-    status: "Sent",
-    approver: "Nguyen Van Man",
-    request_reason: "khanh dep trai",
-    deny_reason: "khong",
-  },
-  {
-    id: 5,
-    name: "Tran Bao Khanh",
-    date: "09/09/2022",
-    status: "Sent",
-    approver: "Nguyen Van Man",
-    request_reason: "khanh dep trai",
-    deny_reason: "khong",
-  },
-  {
-    id: 6,
-    name: "Tran Bao Khanh",
-    date: "09/09/2022",
-    status: "Sent",
-    approver: "Nguyen Van Man",
-    request_reason: "khanh dep trai",
-    deny_reason: "khong",
-  },
-  {
-    id: 7,
-    name: "Tran Bao Khanh",
-    date: "09/09/2022",
-    status: "Sent",
-    approver: "Nguyen Van Man",
-    request_reason: "khanh dep trai",
-    deny_reason: "khong",
+    field: "approveDate",
+    headerName: "Date Approve",
+    width: 200,
+    editable: true,
   },
 ];
 
-const SupportDetails = () => {
+const SupportDetails = (props) => {
   const [selectData, setSelecData] = useState();
   const [openDialog, setOpenDialog] = useState(false);
   const [openDialogNewRequest, setOpenDialogNewRequest] = useState(false);
+
+  const { data, employeeID, reloadCallBack} = props;
+
+  if (!data) {
+    return;
+  }
+
   const onRowsSelectionHandler = (ids) => {
     const selectedRowsData = ids.map((id) =>
-      rowsDataFake.find((row) => row.id === id)
+    data.find((row) => row.id === id)
     );
     setSelecData(selectedRowsData);
     setOpenDialog(true);
-    console.log(selectedRowsData);
+    // console.log(selectedRowsData);
   };
 
-  const onSubmitClicked = () => {
+  const onSubmitClicked = (dataSupport) => {
+    console.log(dataSupport);
+    editSupportRequest(dataSupport);
     setOpenDialog(false);
     setOpenDialogNewRequest(false);
   };
@@ -118,6 +69,14 @@ const SupportDetails = () => {
   const clickedAddNewRequest = () => {
     setOpenDialogNewRequest(true);
   };
+
+  const onNewSubmitClicked = (supportData) =>{
+    console.log(supportData);
+    addNewSupportRequest(supportData);
+    setOpenDialog(false);
+    setOpenDialogNewRequest(false);
+    reloadCallBack();
+  }
   return (
     <>
       <div className="row">
@@ -130,7 +89,7 @@ const SupportDetails = () => {
       <div className="Support-Table">
         <Box sx={{ height: 360, width: "100%" }}>
           <DataGrid
-            rows={rowsDataFake}
+            rows={data}
             columns={columnsDef}
             pageSize={5}
             rowsPerPageOptions={[5]}
@@ -148,7 +107,8 @@ const SupportDetails = () => {
       />
       <NewSupportDialogRequest
         open={openDialogNewRequest}
-        onSubmitClicked={onSubmitClicked}
+        employeeID={employeeID}
+        onNewSubmitClicked={onNewSubmitClicked}
         onCancelClicked={onCancelClicked}
       />
     </>
