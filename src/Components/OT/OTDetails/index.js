@@ -6,7 +6,7 @@ import NewOTRequest from "../OTDialog/NewOTRequest";
 import { DataGrid } from "@mui/x-data-grid";
 import "./index.scss";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
-import { editOTRequest } from "../../API";
+import { addNewOTRequest, editOTRequest } from "../../API";
 const columnsDef = [
   { field: "id", headerName: "STT", width: 20 },
   { field: "date", headerName: "Date", width: 300, editable: true },
@@ -28,22 +28,19 @@ const columnsDef = [
   },
 ];
 
-
 const OTDeTail = (props) => {
   const [selectData, setSelecData] = useState();
   const [openDialog, setOpenDialog] = useState(false);
   const [openDialogNewRequest, setOpenDialogNewRequest] = useState(false);
-  const {data} = props;
-  console.log('data in body OT: ', data);
+  const { data } = props;
+  console.log("data in body OT: ", data);
 
-  if(!data){
+  if (!data) {
     return;
   }
-  console.log('data of OT body: ', data);
+  console.log("data of OT body: ", data);
   const onRowsSelectionHandler = (ids) => {
-    const selectedRowsData = ids.map((id) =>
-    data.find((row) => row.id === id)
-    );
+    const selectedRowsData = ids.map((id) => data.find((row) => row.id === id));
     setSelecData(selectedRowsData);
     setOpenDialog(true);
     console.log(selectedRowsData);
@@ -58,6 +55,12 @@ const OTDeTail = (props) => {
     setOpenDialogNewRequest(false);
   };
 
+  const onNewSubmitClicked = (newOTData) => {
+    console.log(newOTData);
+    addNewOTRequest(newOTData);
+    setOpenDialog(false);
+    setOpenDialogNewRequest(false);
+  };
   const onCancelClicked = () => {
     setOpenDialog(false);
     setOpenDialogNewRequest(false);
@@ -67,15 +70,14 @@ const OTDeTail = (props) => {
     setOpenDialogNewRequest(true);
   };
 
- 
   return (
     <>
       <div className="row">
-        <div className="col OTLable">OT - Tran Bao Khanh</div>
+        <div className="col OTLable"> OT - Tran Bao Khanh </div>{" "}
         <div className="col iconAdd">
-          <PlaylistAddIcon onClick={clickedAddNewRequest} />
-        </div>
-      </div>
+          <PlaylistAddIcon onClick={clickedAddNewRequest} />{" "}
+        </div>{" "}
+      </div>{" "}
       <div className="OT-Table">
         <Box sx={{ height: 360, width: "100%" }}>
           <DataGrid
@@ -86,21 +88,20 @@ const OTDeTail = (props) => {
             disableSelectionOnClick={false}
             experimentalFeatures={{ newEditingApi: true }}
             onSelectionModelChange={(ids) => onRowsSelectionHandler(ids)}
-          />
-        </Box>
-      </div>
+          />{" "}
+        </Box>{" "}
+      </div>{" "}
       <OTRequest
         data={selectData}
         open={openDialog}
         onSubmitClicked={onSubmitClicked}
         onCancelClicked={onCancelClicked}
       ></OTRequest>
-
       <NewOTRequest
         open={openDialogNewRequest}
-        onSubmitClicked={onSubmitClicked}
+        onSubmitClicked={onNewSubmitClicked}
         onCancelClicked={onCancelClicked}
-      />
+      />{" "}
     </>
   );
 };
