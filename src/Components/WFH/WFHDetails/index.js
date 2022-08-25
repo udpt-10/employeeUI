@@ -6,88 +6,30 @@ import "./index.scss";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import WFHRequest from "../WFHDialog/WFHRequest";
 import NewWFHRequest from "../WFHDialog/NewWFHRequest";
+import { addNewWFHRequest, editWFHRequest } from "../../API";
 
 const columnsDef = [
-  { field: "id", headerName: "ID", width: 150 },
-  { field: "date", headerName: "Date", width: 250, editable: true },
-  { field: "checkin", headerName: "Check In", width: 250, editable: true },
-  { field: "checkout", headerName: "Check Out", width: 250, editable: true },
-  { field: "total", headerName: "Total", width: 250, editable: true },
+  { field: "id", headerName: "STT", width: 50 },
+  { field: "date", headerName: "Date", width: 500, editable: true },
 ];
 
-const rowsFakeData = [
-  {
-    id: 1,
-    date: "09/08/2022",
-    checkin: "09/08/2022 08:30:00",
-    checkout: "09/08/2022 17:30:00",
-    total: "8h",
-  },
-  {
-    id: 2,
-    date: "09/08/2022",
-    checkin: "09/08/2022 08:30:00",
-    checkout: "09/08/2022 17:30:00",
-    total: "8h",
-  },
-  {
-    id: 3,
-    date: "09/08/2022",
-    checkin: "09/08/2022 08:30:00",
-    checkout: "09/08/2022 17:30:00",
-    total: "8h",
-  },
-  {
-    id: 4,
-    date: "09/08/2022",
-    checkin: "09/08/2022 08:30:00",
-    checkout: "09/08/2022 17:30:00",
-    total: "8h",
-  },
-  {
-    id: 5,
-    date: "09/08/2022",
-    checkin: "09/08/2022 08:30:00",
-    checkout: "09/08/2022 17:30:00",
-    total: "8h",
-  },
-  {
-    id: 6,
-    date: "09/08/2022",
-    checkin: "09/08/2022 08:30:00",
-    checkout: "09/08/2022 17:30:00",
-    total: "8h",
-  },
-  {
-    id: 7,
-    date: "09/08/2022",
-    checkin: "09/08/2022 08:30:00",
-    checkout: "09/08/2022 17:30:00",
-    total: "8h",
-  },
-  {
-    id: 8,
-    date: "09/08/2022",
-    checkin: "09/08/2022 08:30:00",
-    checkout: "09/08/2022 17:30:00",
-    total: "8h",
-  },
-];
-const WFHDetails = () => {
+const WFHDetails = (props) => {
   const [selectData, setSelecData] = useState();
   const [openDialog, setOpenDialog] = useState(false);
   const [openDialogNewRequest, setOpenDialogNewRequest] = useState(false);
 
+  const { data, employeeID, reloadCallBack} = props;
   const onRowsSelectionHandler = (ids) => {
     const selectedRowsData = ids.map((id) =>
-      rowsFakeData.find((row) => row.id === id)
+    data.find((row) => row.id === id)
     );
     setSelecData(selectedRowsData);
     setOpenDialog(true);
     console.log(selectedRowsData);
   };
 
-  const onSubmitClicked = () => {
+  const onSubmitClicked = (data) => {
+    editWFHRequest(data);
     setOpenDialog(false);
     setOpenDialogNewRequest(false);
   };
@@ -100,6 +42,13 @@ const WFHDetails = () => {
   const clickedAddNewRequest = () => {
     setOpenDialogNewRequest(true);
   };
+
+  const onNewSubmitClicked = (wfhData) =>{
+    addNewWFHRequest(wfhData);
+    setOpenDialog(false);
+    setOpenDialogNewRequest(false);
+    reloadCallBack();
+  }
   return (
     <>
       <div className="row">
@@ -110,9 +59,9 @@ const WFHDetails = () => {
       </div>
 
       <div className="WFH-Table">
-        <Box sx={{ height: 360, width: "100%" }}>
+        <Box sx={{ height: 400, width: "100%" }}>
           <DataGrid
-            rows={rowsFakeData}
+            rows={data}
             columns={columnsDef}
             pageSize={5}
             rowsPerPageOptions={[5]}
@@ -130,7 +79,8 @@ const WFHDetails = () => {
       />
       <NewWFHRequest
         open={openDialogNewRequest}
-        onSubmitClicked={onSubmitClicked}
+        employeeID={employeeID}
+        onNewSubmitClicked={onNewSubmitClicked}
         onCancelClicked={onCancelClicked}
       />
     </>

@@ -15,14 +15,14 @@ const OTRequest = (props) => {
     let newDataState = [...dataState];
     newDataState[0].hour = e.target.value;
     setDataState(newDataState);
-    console.log(e.target.value);
+    // console.log(e.target.value);
   };
 
   const changeReason = (e) => {
     let newDataState = [...dataState];
     newDataState[0].reason = e.target.value;
     setDataState(newDataState);
-    console.log(e.target.value);
+    // console.log(e.target.value);
   };
 
   console.log(data);

@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 const NewWFHRequest = (props) => {
-  const { open, onSubmitClicked, onCancelClicked } = props;
+  const { open, employeeID, onNewSubmitClicked, onCancelClicked } = props;
+  const [data, setData] = useState({
+    employeeId: employeeID,
+    date: ""
+  });
 
+
+  const changeDate = (e) =>{
+    let newData = {...data};
+    newData.date = e.target.value;
+    setData(newData);
+  }
   return (
     <>
       <Dialog open={open}>
@@ -13,11 +23,11 @@ const NewWFHRequest = (props) => {
           <div className="row">
             <div className="col">Date: </div>
             <div className="col">
-              <input type="date" />
+              <input type="datetime-local" onChange={changeDate} />
             </div>
           </div>
           <div className="row">
-            <button onClick={onSubmitClicked} className="col-btn submit">
+            <button onClick={() =>onNewSubmitClicked(data)} className="col-btn submit">
               Submit
             </button>
             <button onClick={onCancelClicked} className="col-btn cancel">

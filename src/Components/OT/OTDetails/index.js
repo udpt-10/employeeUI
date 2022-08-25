@@ -32,34 +32,39 @@ const OTDeTail = (props) => {
   const [selectData, setSelecData] = useState();
   const [openDialog, setOpenDialog] = useState(false);
   const [openDialogNewRequest, setOpenDialogNewRequest] = useState(false);
-  const { data } = props;
-  console.log("data in body OT: ", data);
+
+  const { data, employeeID, reloadCallBack} = props;
+
+
+  // console.log("data in body OT: ", data);
 
   if (!data) {
     return;
   }
-  console.log("data of OT body: ", data);
+  // console.log("data of OT body: ", data);
+
   const onRowsSelectionHandler = (ids) => {
     const selectedRowsData = ids.map((id) => data.find((row) => row.id === id));
     setSelecData(selectedRowsData);
     setOpenDialog(true);
-    console.log(selectedRowsData);
+    // console.log(selectedRowsData);
   };
 
   const onSubmitClicked = (otEditData) => {
-    console.log(otEditData);
+    // console.log(otEditData);
     // delete otEditData[0].id;
-    console.log(otEditData);
+    // console.log(otEditData);
     editOTRequest(otEditData[0]);
     setOpenDialog(false);
     setOpenDialogNewRequest(false);
   };
 
   const onNewSubmitClicked = (newOTData) => {
-    console.log(newOTData);
+    // console.log(newOTData);
     addNewOTRequest(newOTData);
     setOpenDialog(false);
     setOpenDialogNewRequest(false);
+    reloadCallBack();
   };
   const onCancelClicked = () => {
     setOpenDialog(false);
@@ -99,7 +104,8 @@ const OTDeTail = (props) => {
       ></OTRequest>
       <NewOTRequest
         open={openDialogNewRequest}
-        onSubmitClicked={onNewSubmitClicked}
+        employeeID={employeeID}
+        onNewSubmitClicked={onNewSubmitClicked}
         onCancelClicked={onCancelClicked}
       />{" "}
     </>

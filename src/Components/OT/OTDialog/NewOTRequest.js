@@ -1,29 +1,36 @@
 import React, { useState } from "react";
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 const NewOTRequest = (props) => {
-  const { open, onNewSubmitClicked, onCancelClicked } = props;
-  const [data, setData] = useState({});
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState(0);
-  const [reason, setReason] = useState("");
+  const { employeeID, open, onNewSubmitClicked, onCancelClicked } = props;
+  const [data, setData] = useState({
+    employeeId: employeeID,
+    date: "",
+    hour:0,
+    reason: ""
+  });
+ 
 
-  const changedDate = (e) =>{
-    setDate(e.target.value);
-  }
+  const changedDate = (e) => {
+    let newData = {...data};
+    newData.date = e.target.value;
+    setData(newData);
+  };
 
-  const changedTime = (e) =>{
-    setTime(e.target.value);
-  }
+  const changedTime = (e) => {
+    let newData = {...data};
+    newData.hour = e.target.value;
+    setData(newData);
+  };
+
+  const changedReason = (e) => {
+    let newData = {...data};
+    newData.reason = e.target.value;
+    setData(newData);
+  };
 
 
-  const changedReason = (e) =>{
-    setReason(e.target.value);
-  }
 
-  if(date && time && reason) {
-    let tmp = {date, time, reason};
-    setData(tmp);
-  }
+  // console.log(data);
   return (
     <>
       <Dialog open={open}>
@@ -32,24 +39,27 @@ const NewOTRequest = (props) => {
           <div className="row">
             <div className="col">Date: </div>
             <div className="col">
-              <input type="datetime-local" onChange={changedDate}/>
+              <input type="datetime-local" onChange={changedDate} />
             </div>
           </div>
 
           <div className="row">
             <div className="col">Time: </div>
             <div className="col">
-              <input type="number" onChange={changedTime}/>
+              <input type="number" onChange={changedTime} />
             </div>
           </div>
           <div className="row">
             <div className="col">Reason: </div>
             <div className="col">
-              <input type="text" onChange={changedReason}/>
+              <input type="text" onChange={changedReason} />
             </div>
           </div>
           <div className="row">
-            <button onClick={() => onNewSubmitClicked(data)} className="col-btn submit">
+            <button
+              onClick={() => onNewSubmitClicked(data)}
+              className="col-btn submit"
+            >
               Submit
             </button>
             <button onClick={onCancelClicked} className="col-btn cancel">

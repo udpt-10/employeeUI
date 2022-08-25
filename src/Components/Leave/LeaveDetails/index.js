@@ -6,79 +6,50 @@ import "./index.scss";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import LeaveRequest from "../LeaveDialog/LeaveRequest";
 import NewLeaveRequest from "../LeaveDialog/NewLeaveRequest";
+import { addNewLeaveRequest, editLeaveRequest } from "../../API";
 const columnsDef = [
-  { field: "id", headerName: "ID", width: 50 },
-  { field: "name", headerName: "Name", width: 150, editable: true },
-  { field: "date", headerName: "Date", width: 150, editable: true },
-  { field: "period", headerName: "Period", width: 150, editable: true },
-  { field: "status", headerName: "Status", width: 150, editable: true },
+  { field: "id", headerName: "STT", width: 50 },
+  { field: "date", headerName: "Date", width: 300, editable: true },
+  { field: "hour", headerName: "Hour", width: 200, editable: true },
+  { field: "isApproved", headerName: "Status", width: 200, editable: true },
+  { field: "managerId", headerName: "Approvers", width: 200, editable: true },
   {
-    field: "request_reason",
+    field: "reason",
     headerName: "Requeset Reason",
-    width: 150,
+    width: 200,
     editable: true,
   },
   {
-    field: "deny_reason",
+    field: "approveReason",
     headerName: "Deny Reason",
-    width: 150,
+    width: 200,
+    editable: true,
+  },
+  {
+    field: "approveDate",
+    headerName: "Date Approve",
+    width: 200,
     editable: true,
   },
 ];
 
-const rowDataFake = [
-  {
-    id: 1,
-    name: "Tran Bao Khanh",
-    date: "09/09/2022",
-    period: "3days",
-    status: "Sent",
-    request_reason: "khanh dep trai",
-    deny_reason: "khong",
-  },
-  {
-    id: 2,
-    name: "Tran Bao Khanh",
-    date: "09/09/2022",
-    period: "3days",
-    status: "Sent",
-    request_reason: "khanh dep trai",
-    deny_reason: "khong",
-  },
-  {
-    id: 3,
-    name: "Tran Bao Khanh",
-    date: "09/09/2022",
-    period: "3days",
-    status: "Sent",
-    request_reason: "khanh dep trai",
-    deny_reason: "khong",
-  },
-  {
-    id: 4,
-    name: "Tran Bao Khanh",
-    date: "09/09/2022",
-    period: "3days",
-    status: "Sent",
-    request_reason: "khanh dep trai",
-    deny_reason: "khong",
-  },
-];
 
-const LeaveDetail = () => {
+const LeaveDetail = (props) => {
   const [selectData, setSelecData] = useState();
   const [openDialog, setOpenDialog] = useState(false);
   const [openDialogNewRequest, setOpenDialogNewRequest] = useState(false);
+  const {data, employeeID, reloadCallBack} = props;
   const onRowsSelectionHandler = (ids) => {
     const selectedRowsData = ids.map((id) =>
-      rowDataFake.find((row) => row.id === id)
+    data.find((row) => row.id === id)
     );
     setSelecData(selectedRowsData);
     setOpenDialog(true);
     console.log(selectedRowsData);
   };
 
-  const onSubmitClicked = () => {
+  const onSubmitClicked = (leaveData) => {
+    editLeaveRequest(leaveData[0]);
     setOpenDialog(false);
     setOpenDialogNewRequest(false);
   };
@@ -92,6 +63,12 @@ const LeaveDetail = () => {
     setOpenDialogNewRequest(true);
   };
 
+  const onNewSubmitClicked = (newLeaveData) => {
+    addNewLeaveRequest(newLeaveData);
+    setOpenDialog(false);
+    setOpenDialogNewRequest(false);
+    reloadCallBack();
+  }
   return (
     <>
       <div className="row">
@@ -104,7 +81,7 @@ const LeaveDetail = () => {
       <div className="Leave-Table">
         <Box sx={{ height: 360, width: "100%" }}>
           <DataGrid
-            rows={rowDataFake}
+            rows={data}
             columns={columnsDef}
             pageSize={5}
             rowsPerPageOptions={[5]}
@@ -122,7 +99,8 @@ const LeaveDetail = () => {
       />
       <NewLeaveRequest
         open={openDialogNewRequest}
-        onSubmitClicked={onSubmitClicked}
+        employeeID={employeeID}
+        onNewSubmitClicked={onNewSubmitClicked}
         onCancelClicked={onCancelClicked}
       />
     </>

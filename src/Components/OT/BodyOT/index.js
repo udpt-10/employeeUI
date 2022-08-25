@@ -5,18 +5,25 @@ import React, { useEffect, useState } from "react";
 import { OTRequest } from "../../API";
 const BodyOT = () => {
   const [data, setData] = useState();
+  //isreload
+  //fucn reload 
+  const [isReload, setReload] = useState(false);
+
   const employeeID = JSON.parse(localStorage.getItem("data")).employeeId;
   console.log(employeeID);
 
+  const reloadCallBack =() =>{
+    setReload(!isReload);
+  }
   useEffect(() => {
     if (data) {
       return;
     }
-    console.log("data: ", data);
+    // console.log("data: ", data);
     OTRequest(employeeID).then((res) => setData(res.data));
-  }, [data]);
+  }, [data, isReload]);
 
-  console.log("data: ", data);
+  // console.log("data: ", data);
 
   if(!data){
     return;
@@ -30,11 +37,10 @@ const BodyOT = () => {
   }
 
 
-
   return (
     <>
       <Navigation />
-      <OTDeTail data={data}/>
+      <OTDeTail data={data} employeeID={employeeID} reloadCallBack={reloadCallBack}/>
       <Footer />
     </>
   );
