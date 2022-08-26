@@ -30,8 +30,8 @@ const Employee = (props) => {
       </div>
       <div className="employee-company">
         <p>Name Company: TMA </p>
-        <p>Director: {data.director}</p>
-        <p>Manager: {data.manager}</p>
+        <p>Director: {data.directorName}</p>
+        <p>Manager: {data.managerName}</p>
       </div>
     </div>
   );

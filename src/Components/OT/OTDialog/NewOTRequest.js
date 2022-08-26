@@ -6,7 +6,8 @@ const NewOTRequest = (props) => {
     employeeId: employeeID,
     date: "",
     hour:0,
-    reason: ""
+    reason: "",
+    managerId:  JSON.parse(localStorage.getItem("data")).managerId
   });
  
 

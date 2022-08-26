@@ -37,7 +37,7 @@ const Login = () => {
   console.log('data real: ', JSON.parse(localStorage.getItem("data" )));
   return (
     <div id="pageLogin">
-      <div className="fomr">
+      <div id="logindetail">
         <h2>Welcome Employee</h2>
         <fieldset>
           <ul>

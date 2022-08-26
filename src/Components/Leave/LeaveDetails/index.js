@@ -72,7 +72,7 @@ const LeaveDetail = (props) => {
   return (
     <>
       <div className="row">
-        <div className="col LeaveLable">Leave - Tran Bao Khanh</div>
+        <div className="col LeaveLable">Leave -  {JSON.parse(localStorage.getItem("data")).employeeName}</div>
         <div className="col iconAdd">
           <PlaylistAddIcon onClick={clickedAddNewRequest} />
         </div>

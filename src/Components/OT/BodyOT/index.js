@@ -11,7 +11,7 @@ const BodyOT = () => {
 
   const employeeID = JSON.parse(localStorage.getItem("data")).employeeId;
   console.log(employeeID);
-
+  console.log(localStorage.getItem("data"));
   const reloadCallBack =() =>{
     setReload(!isReload);
   }

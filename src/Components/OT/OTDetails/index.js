@@ -78,7 +78,7 @@ const OTDeTail = (props) => {
   return (
     <>
       <div className="row">
-        <div className="col OTLable"> OT - Tran Bao Khanh </div>{" "}
+        <div className="col OTLable"> OT - {JSON.parse(localStorage.getItem("data")).employeeName}</div>{" "}
         <div className="col iconAdd">
           <PlaylistAddIcon onClick={clickedAddNewRequest} />{" "}
         </div>{" "}
