@@ -9,10 +9,11 @@ import NewSupportDialogRequest from "../SupportDialog/NewSupportDialog";
 import { addNewSupportRequest, editSupportRequest } from "../../API";
 const columnsDef = [
   { field: "id", headerName: "ID", width: 20 },
+  { field: "employeeName", headerName: "Name", width: 20 },
   { field: "department", headerName: "Department", width: 150, editable: true },
   { field: "date", headerName: "Date", width: 150, editable: true },
 
-  { field: "approver", headerName: "Approver", width: 150, editable: true },
+  { field: "managerName", headerName: "Approver", width: 150, editable: true },
   {
     field: "reason",
     headerName: "Request Reason",
@@ -80,7 +81,7 @@ const SupportDetails = (props) => {
   return (
     <>
       <div className="row">
-        <div className="col SupportLable">Support - Tran Bao Khanh</div>
+        <div className="col SupportLable">Support -  {JSON.parse(localStorage.getItem("data")).employeeName}</div>
         <div className="col iconAdd">
           <PlaylistAddIcon onClick={clickedAddNewRequest} />
         </div>

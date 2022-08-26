@@ -57,7 +57,7 @@ const LeaveRequest = (props) => {
           <div className="row">
             <div className="col">Approver</div>
             <div className="col">
-              <input value={dataState[0].managerId} readOnly />
+              <input value={dataState[0].managerName} readOnly />
             </div>
           </div>
           <div className="row">

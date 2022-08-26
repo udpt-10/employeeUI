@@ -9,6 +9,8 @@ const NewSupportDialogRequest = (props) => {
     department: "",
     reason: "",
     describe: "",
+    managerId:   JSON.parse(localStorage.getItem("data")).manager,
+    directorId: JSON.parse(localStorage.getItem("data")).director
   });
 
   const changeDate = (e) => {

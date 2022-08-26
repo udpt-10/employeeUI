@@ -7,10 +7,10 @@ const NewOTRequest = (props) => {
     date: "",
     hour:0,
     reason: "",
-    managerId:  JSON.parse(localStorage.getItem("data")).managerId
+    managerId:  JSON.parse(localStorage.getItem("data")).manager
   });
  
-
+  console.log(data);
   const changedDate = (e) => {
     let newData = {...data};
     newData.date = e.target.value;

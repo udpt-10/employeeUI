@@ -35,6 +35,12 @@ const SupportDialog = (props) => {
         <Dialog open={open} className="dialog-OTRequest">
         <DialogTitle>OT Request</DialogTitle>
         <DialogContent>
+        <div className="row">
+            <label className="col">Name: </label>
+            <div className="col">
+              <input value={dataState[0].employeeName} readOnly />
+            </div>
+          </div>
           <div className="row">
             <label className="col">Date: </label>
             <div className="col">
@@ -53,7 +59,7 @@ const SupportDialog = (props) => {
           <div className="row">
             <label className="col">Approver: </label>
             <div className="col">
-              <input value={dataState[0].approver} readOnly />
+              <input value={dataState[0].managerName} readOnly />
             </div>
           </div>
 

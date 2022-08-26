@@ -52,7 +52,7 @@ const WFHDetails = (props) => {
   return (
     <>
       <div className="row">
-        <div className="col OTLable">WFH - Tran Bao Khanh</div>
+        <div className="col OTLable">WFH -  {JSON.parse(localStorage.getItem("data")).employeeName}</div>
         <div className="col iconAdd">
           <PlaylistAddIcon onClick={clickedAddNewRequest}/>
         </div>

@@ -83,7 +83,7 @@ const Salary = () => {
     <>
       <Navigation />
       <div className="row">
-        <div className="col SalaryLable">Salary - Tran Bao Khanh</div>
+        <div className="col SalaryLable">Salary -  {JSON.parse(localStorage.getItem("data")).employeeName}</div>
       </div>
 
       <div className="Salary-Table">

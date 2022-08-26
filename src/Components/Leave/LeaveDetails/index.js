@@ -12,7 +12,7 @@ const columnsDef = [
   { field: "date", headerName: "Date", width: 300, editable: true },
   { field: "hour", headerName: "Hour", width: 200, editable: true },
   { field: "isApproved", headerName: "Status", width: 200, editable: true },
-  { field: "managerId", headerName: "Approvers", width: 200, editable: true },
+  { field: "managerName", headerName: "Approvers", width: 200, editable: true },
   {
     field: "reason",
     headerName: "Requeset Reason",

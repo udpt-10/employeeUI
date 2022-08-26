@@ -65,7 +65,7 @@ const OTRequest = (props) => {
           <div className="row">
             <label className="col"> Approver: </label>{" "}
             <div className="col">
-              <input value={dataState[0].managerId} readOnly />
+              <input value={dataState[0].managerName} readOnly />
             </div>{" "}
           </div>
           <div className="row">

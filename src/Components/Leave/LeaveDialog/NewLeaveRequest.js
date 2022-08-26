@@ -6,7 +6,8 @@ const NewLeaveRequest = (props) => {
     employeeId: employeeID,
     date: "",
     hour: 0,
-    reason: ""
+    reason: "",
+    managerId:  JSON.parse(localStorage.getItem("data")).manager
   });
 
   const changeDate =  (e) =>{
