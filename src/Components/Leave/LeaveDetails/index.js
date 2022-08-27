@@ -8,7 +8,7 @@ import LeaveRequest from "../LeaveDialog/LeaveRequest";
 import NewLeaveRequest from "../LeaveDialog/NewLeaveRequest";
 import { addNewLeaveRequest, editLeaveRequest } from "../../API";
 const columnsDef = [
-  { field: "id", headerName: "STT", width: 50 },
+  { field: "id", headerName: "STT", width: 50, hide: true},
   { field: "date", headerName: "Date", width: 300, editable: true },
   { field: "hour", headerName: "Hour", width: 200, editable: true },
   { field: "isApproved", headerName: "Status", width: 200, editable: true },

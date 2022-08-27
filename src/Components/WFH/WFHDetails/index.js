@@ -9,7 +9,7 @@ import NewWFHRequest from "../WFHDialog/NewWFHRequest";
 import { addNewWFHRequest, editWFHRequest } from "../../API";
 
 const columnsDef = [
-  { field: "id", headerName: "STT", width: 50 },
+  { field: "id", headerName: "STT", width: 50, hide: true },
   { field: "date", headerName: "Date", width: 500, editable: true },
 ];
 

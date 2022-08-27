@@ -8,7 +8,7 @@ import SupportDialog from "../SupportDialog/SupportDialog";
 import NewSupportDialogRequest from "../SupportDialog/NewSupportDialog";
 import { addNewSupportRequest, editSupportRequest } from "../../API";
 const columnsDef = [
-  { field: "id", headerName: "ID", width: 20 },
+  { field: "id", headerName: "ID", width: 20, hide: true },
   { field: "employeeName", headerName: "Name", width: 20 },
   { field: "department", headerName: "Department", width: 150, editable: true },
   { field: "date", headerName: "Date", width: 150, editable: true },

@@ -8,7 +8,13 @@ export const getEmployeeDetailsFromUserName = (username) => {
 };
 
 export const login = (username, password) => {
-  const config = { headers: { "Content-Type": "application/json" } };
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+    },
+  };
   const data = { userName: username, password: password };
   const url = "http://localhost:8001/employee/login";
   return axios.post(url, data, config);
