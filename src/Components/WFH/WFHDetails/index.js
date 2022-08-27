@@ -32,6 +32,7 @@ const WFHDetails = (props) => {
     editWFHRequest(data);
     setOpenDialog(false);
     setOpenDialogNewRequest(false);
+    reloadCallBack();
   };
 
   const onCancelClicked = () => {

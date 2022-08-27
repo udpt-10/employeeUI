@@ -21,7 +21,7 @@ const BodyOT = () => {
     }
     // console.log("data: ", data);
     OTRequest(employeeID).then((res) => setData(res.data));
-  }, [data, isReload]);
+  }, [ isReload]);
 
   // console.log("data: ", data);
 

@@ -13,11 +13,11 @@ const BodyWFH = () => {
   };
 
   useEffect(() => {
-    if (data) {
-      return;
-    }
+    // if (data) {
+    //   return;
+    // }
     WFHRequest(employeeID).then((res) => setData(res.data));
-  }, [data, isReload]);
+  }, [isReload]);
 
   if (!data) {
     return;

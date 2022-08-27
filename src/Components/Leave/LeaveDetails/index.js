@@ -52,6 +52,7 @@ const LeaveDetail = (props) => {
     editLeaveRequest(leaveData[0]);
     setOpenDialog(false);
     setOpenDialogNewRequest(false);
+    reloadCallBack();
   };
 
   const onCancelClicked = () => {

@@ -10,15 +10,18 @@ const BodySupport = () => {
   
   const reloadCallBack = () => {
     setReload(!isReload);
+    console.log('reload support ');
   };
 
   useEffect(() => {
-    if (data) {
-      return;
-    }
+    // if (data) {
+    //   return;
+    // }
     supportRequest(employeeID).then((res) => setData(res.data));
-  }, [data, isReload]);
+  }, [isReload]);
 
+
+  
   if (!data) {
     return;
   }

@@ -9,7 +9,7 @@ import NewSupportDialogRequest from "../SupportDialog/NewSupportDialog";
 import { addNewSupportRequest, editSupportRequest } from "../../API";
 const columnsDef = [
   { field: "id", headerName: "ID", width: 20, hide: true },
-  { field: "employeeName", headerName: "Name", width: 20 },
+  { field: "employeeName", headerName: "Name", width: 200 },
   { field: "department", headerName: "Department", width: 150, editable: true },
   { field: "date", headerName: "Date", width: 150, editable: true },
 
@@ -41,7 +41,7 @@ const SupportDetails = (props) => {
   const [openDialogNewRequest, setOpenDialogNewRequest] = useState(false);
 
   const { data, employeeID, reloadCallBack} = props;
-
+  console.log(reloadCallBack);
   if (!data) {
     return;
   }
@@ -60,6 +60,7 @@ const SupportDetails = (props) => {
     editSupportRequest(dataSupport);
     setOpenDialog(false);
     setOpenDialogNewRequest(false);
+    reloadCallBack();
   };
 
   const onCancelClicked = () => {

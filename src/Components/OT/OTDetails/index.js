@@ -54,9 +54,10 @@ const OTDeTail = (props) => {
     // console.log(otEditData);
     // delete otEditData[0].id;
     // console.log(otEditData);
-    editOTRequest(otEditData[0]);
+    editOTRequest(otEditData);
     setOpenDialog(false);
     setOpenDialogNewRequest(false);
+    reloadCallBack();
   };
 
   const onNewSubmitClicked = (newOTData) => {

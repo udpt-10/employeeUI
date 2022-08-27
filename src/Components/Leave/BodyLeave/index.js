@@ -14,11 +14,11 @@ const BodyLeave = () => {
     setReload(!isReload);
   }
   useEffect(() => {
-    if (data) {
-      return;
-    }
+    // if (data) {
+    //   return;
+    // }
     leaveRequest(employeeID).then((res) => setData(res.data));
-  }, [data, isReload]);
+  }, [ isReload]);
 
   console.log('data of leave: ', data);
   if (!data) {
